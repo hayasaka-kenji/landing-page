@@ -1,0 +1,25 @@
+@charset "UTF-8";
+
+body {
+  width: 100vw;
+  height: 100vh;
+  margin: auto;
+}
+
+main {
+  display: grid;
+  height: 100%;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
+  > div {
+    border: 1px dashed #666;
+    font-size: 5rem;
+    color: #666;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    &:nth-child(odd) {
+      background-color: lightyellow;
+    }
+  }
+}
