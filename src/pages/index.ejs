@@ -1,15 +1,16 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ja">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <link rel="stylesheet" type="text/css" href="/css/style.css">
+  <script src="js/main.js" defer></script>
   <title>EJS</title>
 </head>
 <body>
-  <main><% for (let i = 0; i < 9; i++) { %>
-    <div><%= i+1 %></div><% } %>
+  <main id="hoge"><% for (let i = 0; i < 12; i++) { %>
+    <div><%= i+1 %><%= include('component/_parts'); %></div><% } %>
   </main>
 </body>
 </html>

@@ -1,5 +1,5 @@
 // Packages
-import browserSync, {reload, stream} from 'browser-sync'
+import browserSync, {stream} from 'browser-sync'
 import gulp from 'gulp'
 import sass from 'gulp-sass'
 import autoprefixer from 'autoprefixer'
@@ -9,6 +9,7 @@ import ejs from 'gulp-ejs'
 import notify from 'gulp-notify'
 import plumber from 'gulp-plumber'
 import rename from 'gulp-rename'
+import babel from 'gulp-babel'
 import imagemin from 'gulp-imagemin'
 import pngquant from 'imagemin-pngquant'
 import mozjpeg from 'imagemin-mozjpeg'
@@ -28,20 +29,19 @@ const paths = {
     dest: `${config.destDir}css/`
   },
   scripts: {
-    src: `${config.srcDir}**/*.js`,
+    src: `${config.srcDir}scripts/*.js`,
     dest: `${config.destDir}js/`
   },
   images: {
     src: `${config.srcDir}images/*.{png,jpg,gif,svg}`,
     dest: `${config.destDir}img/`
   },
-};
+}
 
 const options = {
   postcssProcessors: [
     autoprefixer({
       grid: true,
-      browsers: ['last 2 version'],
     }),
     flexBugsFixes
   ],
@@ -53,11 +53,9 @@ const options = {
   ]
 }
 
-
 // Server
 function server(done) {
   return browserSync.init({
-    open: 'external',
     server: {
       baseDir: `${config.destDir}`
     }
@@ -87,6 +85,13 @@ function styles() {
 }
 
 // Scripts
+function scripts() {
+  return gulp
+    .src(paths.scripts.src)
+    .pipe(babel())
+    .pipe(gulp.dest(paths.scripts.dest))
+    .pipe(stream())
+}
 
 // Images
 function images() {
@@ -100,10 +105,11 @@ function images() {
 function watchFiles() {
   gulp.watch(paths.pages.src, gulp.series(pages))
   gulp.watch(paths.styles.src, gulp.series(styles))
+  gulp.watch(paths.scripts.src, gulp.series(scripts))
 }
 
 // Default
 gulp.task('default',gulp.series(
-  gulp.parallel(pages, styles, images),
+  gulp.parallel(pages, styles, scripts, images),
   gulp.series(server, watchFiles),
 ))
