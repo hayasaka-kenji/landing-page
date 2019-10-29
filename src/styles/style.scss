@@ -1,4 +1,4 @@
-@charset "UTF-8";
+@import "./set";
 
 body {
   width: 100vw;
@@ -9,8 +9,7 @@ body {
 main {
   display: grid;
   height: 100%;
-  grid-template-columns: 1fr 1fr 1fr;
-  grid-template-rows: 1fr 1fr 1fr;
+
   > div {
     border: 1px dashed #666;
     font-size: 5rem;
@@ -21,5 +20,17 @@ main {
     &:nth-child(odd) {
       background-color: lightyellow;
     }
+  }
+
+  @include view-at(sp) {
+    gap: 2%;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr;
+  }
+
+  @include view-at(pc) {
+    gap: 5%;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr;
   }
 }

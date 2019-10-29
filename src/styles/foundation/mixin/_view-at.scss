@@ -1,0 +1,15 @@
+@import "../variables";
+// PCビューとスマホビューの切り替え
+
+@mixin view-at($mode: 'pc') {
+  @if ($mode == 'sp') {
+    @media screen and (max-width: $mq-lg - 1) {
+      @content;
+    }
+  }
+  @else if ($mode == 'pc') {
+    @media screen and (min-width: $mq-lg), print {
+      @content;
+    }
+  }
+}
