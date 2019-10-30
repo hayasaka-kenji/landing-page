@@ -1,4 +1,12 @@
 # markup-starter  
+- 既存サイトのマークアップを任されたときなどに使います。
+- カスタマイズしやすいようにwebpackやlintは導入していません。
 
-既存サイトのマークアップを任されたときなどに使います。  
-カスタマイズしやすいようにwebpackは使ってません。  
+## HTML
+- EJS
+
+## CSS
+- SCSS
+
+## JavaScripts
+- Babel
